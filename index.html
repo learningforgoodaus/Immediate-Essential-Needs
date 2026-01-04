@@ -3,50 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tap and Reveal Activity</title>
+    <title>Immediate Essential Life Needs</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
-        /* Brand Colors: 
-           #1f2a52 (Midnight Blue)
-           #00bec7 (Teal)
-           #d2f0f0 (Light Aqua)
-           #abb5bf (Slate Grey)
+        /* Brand Colours Palette
+           #C6B4D9 (Soft Lavender)
+           #513873 (Deep Purple)
+           #413659 (Midnight Purple)
+           #F2F2F2 (Off White)
+           #9C7F9D (Muted Rose)
+           #f6f5f8 (Soft Grey Background)
         */
+        :root {
+            --brand-lavender: #C6B4D9;
+            --brand-purple: #513873;
+            --brand-dark: #413659;
+            --brand-grey: #f6f5f8;
+            --brand-rose: #9C7F9D;
+            --brand-offwhite: #F2F2F2;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #1f2a52;
-            padding: 2rem 1rem;
-            min-height: 100vh;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            background-color: var(--brand-grey);
+            color: var(--brand-dark);
+            margin: 0;
+            padding: 20px;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .activity-card {
-            max-width: 900px;
+        .container {
+            max-width: 1100px;
             width: 100%;
-            background-color: #ffffff;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 30px rgba(31, 42, 82, 0.1);
-            overflow: hidden;
-            border: 1px solid #d2f0f0;
         }
 
-        .header-bar {
-            background-color: #1f2a52;
+        .section-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(65, 54, 89, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--brand-lavender);
+        }
+
+        .header {
+            background-color: var(--brand-purple);
             padding: 1.5rem 2.5rem;
             color: #ffffff;
             text-align: center;
+        }
+
+        .description-area {
+            padding: 1.5rem 2.5rem 0.5rem 2.5rem;
+            line-height: 1.5;
+            color: var(--brand-dark);
+            text-align: center;
+        }
+
+        .instruction-bar {
+            padding: 1rem 1.25rem;
+            text-align: center;
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--brand-offwhite);
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
-            padding: 2.5rem;
+            padding: 2rem;
         }
 
         @media (min-width: 640px) {
@@ -55,64 +83,87 @@
             }
         }
 
+        @media (min-width: 1024px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
         .reveal-item {
-            aspect-ratio: 16/10;
+            aspect-ratio: 1/1.2;
             position: relative;
             overflow: hidden;
             border-radius: 1rem;
-            background-color: #f1f5f9;
+            background-color: #ffffff;
             cursor: pointer;
-            border: 1px solid #d2f0f0;
+            border: 1px solid var(--brand-lavender);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s ease;
         }
 
         .reveal-item:hover {
             transform: scale(1.02);
-            border-color: #00bec7;
+            border-color: var(--brand-purple);
         }
 
-        /* The Visual Layer (Title below Plus Sign) */
+        /* The Visual Layer */
         .visual-layer {
             width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--brand-offwhite) 100%);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 110px;
+            background-color: var(--brand-offwhite);
+            border-radius: 0.75rem;
+            display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            gap: 1rem; /* Spacing between plus and heading */
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            border: 1px dashed var(--brand-lavender);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .category-title {
             font-weight: 700;
-            font-size: 1.4rem;
-            color: #1f2a52;
+            font-size: 1.1rem;
+            color: var(--brand-dark);
             text-align: center;
-            max-width: 90%;
             line-height: 1.2;
+            margin-bottom: 0.5rem;
         }
 
-        /* Plus Icon (Now inside Flex layout) */
         .plus-button {
-            width: 56px;
-            height: 56px;
-            background-color: #00bec7;
+            width: 50px;
+            height: 50px;
+            background-color: var(--brand-purple);
             color: #ffffff;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.25rem;
+            font-size: 2rem;
             font-weight: 400;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 190, 199, 0.4);
+            box-shadow: 0 4px 12px rgba(81, 56, 115, 0.3);
             pointer-events: none;
         }
 
         .reveal-item:hover .plus-button {
-            background-color: #1f2a52;
+            background-color: var(--brand-dark);
             transform: scale(1.1);
         }
 
@@ -121,21 +172,22 @@
             transform: scale(0.5);
         }
 
-        /* The Info Panel (Slides up) */
+        /* The Info Panel */
         .info-panel {
             position: absolute;
             bottom: -100%;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #d2f0f0; 
-            color: #1f2a52;
+            background-color: var(--brand-lavender); 
+            color: var(--brand-dark);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 2rem;
+            padding: 1.5rem;
             transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 20;
+            text-align: center;
         }
 
         .reveal-item.active .info-panel {
@@ -144,131 +196,113 @@
 
         .info-panel h3 {
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             margin-bottom: 0.75rem;
-            color: #1f2a52;
-            border-bottom: 2px solid #00bec7;
+            color: var(--brand-dark);
+            border-bottom: 2px solid var(--brand-purple);
             padding-bottom: 0.25rem;
             width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .info-panel ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .info-panel li {
-            margin-bottom: 0.4rem;
-            position: relative;
-            padding-left: 1.25rem;
+        .info-panel p {
             line-height: 1.4;
-            font-size: 0.9rem;
-        }
-
-        .info-panel li::before {
-            content: "•";
-            color: #00bec7;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .close-hint {
             margin-top: 1rem;
             font-size: 0.75rem;
-            color: #abb5bf;
+            color: var(--brand-purple);
             font-style: italic;
-            text-align: right;
         }
     </style>
 </head>
 <body>
 
-    <div class="activity-card">
-        <div class="header-bar">
-            <h1 class="text-2xl font-bold uppercase tracking-wide">Tap and Reveal</h1>
-        </div>
-
-        <div class="grid-container">
-            <!-- Item 1 (Top Left) -->
-            <div class="reveal-item" onclick="toggleReveal(this)">
-                <div class="visual-layer">
-                    <div class="plus-button">+</div>
-                    <span class="category-title">Lorem Ipsum One</span>
-                </div>
-                <div class="info-panel">
-                    <h3>Lorem Ipsum</h3>
-                    <ul>
-                        <li>Consectetur adipiscing elit.</li>
-                        <li>Sed do eiusmod tempor.</li>
-                        <li>Incididunt ut labore et dolore.</li>
-                        <li>Magna aliqua ut enim ad.</li>
-                    </ul>
-                    <p class="close-hint">Tap to close</p>
-                </div>
+    <div class="container">
+        <div class="section-card">
+            <div class="header">
+                <h1 class="text-2xl font-bold uppercase tracking-wider">Immediate Essential Needs</h1>
             </div>
 
-            <!-- Item 2 (Top Right) -->
-            <div class="reveal-item" onclick="toggleReveal(this)">
-                <div class="visual-layer">
-                    <div class="plus-button">+</div>
-                    <span class="category-title">Lorem Ipsum Two</span>
-                </div>
-                <div class="info-panel">
-                    <h3>Dolor Sit Amet</h3>
-                    <ul>
-                        <li>Quis nostrud exercitation.</li>
-                        <li>Laboris nisi ut aliquip.</li>
-                        <li>Commodo consequat duis.</li>
-                        <li>Irure dolor in reprehenderit.</li>
-                    </ul>
-                    <p class="close-hint">Tap to close</p>
-                </div>
+            <div class="description-area">
+                <p>Helping someone with their basic needs is an important first step. It allows you to see if they have the essentials they need to stay safe and supported in these first few moments.</p>
             </div>
 
-            <!-- Item 3 (Bottom Left) -->
-            <div class="reveal-item" onclick="toggleReveal(this)">
-                <div class="visual-layer">
-                    <div class="plus-button">+</div>
-                    <span class="category-title">Lorem Ipsum Three</span>
-                </div>
-                <div class="info-panel">
-                    <h3>Adipiscing Elit</h3>
-                    <ul>
-                        <li>Voluptate velit esse cillum.</li>
-                        <li>Dolore eu fugiat nulla.</li>
-                        <li>Excepteur sint occaecat.</li>
-                        <li>Non proident sunt in culpa.</li>
-                    </ul>
-                    <p class="close-hint">Tap to close</p>
-                </div>
+            <div class="instruction-bar">
+                <p class="text-gray-600 text-sm italic">Tap the plus sign on each card to see the simple questions you can ask.</p>
             </div>
 
-            <!-- Item 4 (Bottom Right) -->
-            <div class="reveal-item" onclick="toggleReveal(this)">
-                <div class="visual-layer">
-                    <div class="plus-button">+</div>
-                    <span class="category-title">Lorem Ipsum Four</span>
+            <div class="grid-container">
+                <!-- Safe Shelter -->
+                <div class="reveal-item" onclick="this.classList.toggle('active')">
+                    <div class="visual-layer">
+                        <div class="image-container">
+                            <img src="Safe Shelter.png" alt="Safe Shelter" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-xs text-gray-400\'>Safe Shelter.png</span>'">
+                        </div>
+                        <span class="category-title">Safe Shelter</span>
+                        <div class="plus-button">+</div>
+                    </div>
+                    <div class="info-panel">
+                        <h3>Safe Shelter</h3>
+                        <p>"Do you have a safe place to stay tonight?"</p>
+                        <p class="close-hint">Tap to close</p>
+                    </div>
                 </div>
-                <div class="info-panel">
-                    <h3>Tempor Incididunt</h3>
-                    <ul>
-                        <li>Ut labore et dolore magna.</li>
-                        <li>Aliqua ut enim ad minim.</li>
-                        <li>Quis nostrud exercitation.</li>
-                        <li>Ullamco laboris nisi.</li>
-                    </ul>
-                    <p class="close-hint">Tap to close</p>
+
+                <!-- Food and Medicine -->
+                <div class="reveal-item" onclick="this.classList.toggle('active')">
+                    <div class="visual-layer">
+                        <div class="image-container">
+                            <img src="Food and Medicine.png" alt="Food and Medicine" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-xs text-gray-400\'>Food and Medicine.png</span>'">
+                        </div>
+                        <span class="category-title">Food and Medicine</span>
+                        <div class="plus-button">+</div>
+                    </div>
+                    <div class="info-panel">
+                        <h3>Food and Medicine</h3>
+                        <p>"Do you have enough food or medicine for the next few hours?"</p>
+                        <p class="close-hint">Tap to close</p>
+                    </div>
+                </div>
+
+                <!-- Money and ID -->
+                <div class="reveal-item" onclick="this.classList.toggle('active')">
+                    <div class="visual-layer">
+                        <div class="image-container">
+                            <img src="Money and ID.png" alt="Money and ID" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-xs text-gray-400\'>Money and ID.png</span>'">
+                        </div>
+                        <span class="category-title">Money and ID</span>
+                        <div class="plus-button">+</div>
+                    </div>
+                    <div class="info-panel">
+                        <h3>Money and ID</h3>
+                        <p>"Do you have access to your money or ID right now?"</p>
+                        <p class="close-hint">Tap to close</p>
+                    </div>
+                </div>
+
+                <!-- Safe Travel -->
+                <div class="reveal-item" onclick="this.classList.toggle('active')">
+                    <div class="visual-layer">
+                        <div class="image-container">
+                            <img src="Safe Travel.png" alt="Safe Travel" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-xs text-gray-400\'>Safe Travel.png</span>'">
+                        </div>
+                        <span class="category-title">Safe Travel</span>
+                        <div class="plus-button">+</div>
+                    </div>
+                    <div class="info-panel">
+                        <h3>Safe Travel</h3>
+                        <p>"Do you have a safe way to get to where you are going?"</p>
+                        <p class="close-hint">Tap to close</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        function toggleReveal(element) {
-            element.classList.toggle('active');
-        }
-    </script>
 </body>
 </html>
